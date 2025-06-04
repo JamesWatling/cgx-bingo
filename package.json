@@ -1,0 +1,36 @@
+{
+  "name": "cgx-bingo",
+  "version": "1.0.0",
+  "description": "A real-time social bingo web app designed for group events.",
+  "main": "src/index.tsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "bingo",
+    "real-time",
+    "web-app",
+    "social"
+  ],
+  "author": "James Watling",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "canvas-confetti": "^1.6.0",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/ws": "^8.5.4",
+    "@types/canvas-confetti": "^1.6.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
+}
