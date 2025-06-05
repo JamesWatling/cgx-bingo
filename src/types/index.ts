@@ -22,10 +22,36 @@ export interface GameState {
   winner: string | null;
   gameStarted: boolean;
   soundEnabled: boolean;
+  events: GameEvent[];
+}
+
+export interface MarkedSquare {
+  index: number;
+  participantName: string;
+  answer?: string;
+}
+
+export interface GameEvent {
+  id: string;
+  timestamp: number;
+  type: 'player_joined' | 'player_left' | 'square_marked' | 'bingo_winner' | 'game_reset';
+  playerName: string;
+  details?: {
+    prompt?: string;
+    participantName?: string;
+    answer?: string;
+  };
+}
+
+export interface CurrentStatePayload {
+  winner: string | null;
+  players: Player[];
+  playerBoards: Record<string, MarkedSquare[]>;
+  events: GameEvent[];
 }
 
 export interface WebSocketMessage {
-  type: 'PLAYERS_UPDATE' | 'SQUARE_MARKED' | 'BINGO_WINNER' | 'GAME_RESET' | 'PLAYER_JOINED';
+  type: 'PLAYERS_UPDATE' | 'SQUARE_MARKED' | 'BINGO_WINNER' | 'GAME_RESET' | 'PLAYER_JOINED' | 'CURRENT_STATE' | 'REQUEST_CURRENT_STATE' | 'GAME_EVENT';
   payload: any;
 }
 

@@ -1,3 +1,139 @@
+# CGX Bingo - Troubleshooting Guide
+
+## Common Issues and Solutions
+
+### 1. Scoreboard not showing current game state
+
+**Problem**: When navigating to the scoreboard, it only shows new events, not the current state of players' boards.
+
+**Solution**: ✅ **FIXED** - The server now maintains complete game state and automatically sends it to new connections.
+
+**How it works**:
+- Server stores all marked squares for each player
+- When a client connects, server automatically sends current state
+- Scoreboard requests current state when it mounts
+- All current marked squares and winner state are restored
+
+**Testing**:
+1. Start the game with multiple players
+2. Have players mark some squares
+3. Navigate to scoreboard - should show all current progress
+4. Refresh scoreboard - should still show current state
+
+### 2. WebSocket Connection Issues
+
+**Problem**: WebSocket connections failing with WSS on HTTPS sites.
+
+**Solution**: 
+- Enable WebSocket support in Cloudflare dashboard
+- Use Cloudflare Flexible SSL mode
+- Updated nginx configuration for better WebSocket handling
+
+**Debugging**:
+```bash
+# Test WebSocket connection manually
+const ws = new WebSocket('wss://cgx.jameswatling.com');
+ws.onopen = () => console.log('✅ Connected');
+ws.onerror = (e) => console.log('❌ Error:', e);
+```
+
+### 3. Winner Modal Not Showing
+
+**Problem**: Winner modal only appears on scoreboard, not on individual player screens.
+
+**Solution**: ✅ **FIXED** - Implemented message queue system to handle race conditions.
+
+### 4. Players Not Updating
+
+**Problem**: Player list not updating when players join/leave.
+
+**Current Status**: 
+- Server tracks players correctly
+- Updates broadcast to all clients
+- Check WebSocket connection status
+
+### 5. Game State Not Persisting
+
+**Problem**: Game state lost when players reconnect.
+
+**Solution**: ✅ **IMPROVED** - Server now maintains:
+- All marked squares for each player
+- Winner state
+- Player connection status
+- Game can be resumed after brief disconnections
+
+## Debug Features
+
+### Server-side Debugging
+- All WebSocket messages logged with details
+- Player state tracking
+- Game state persistence monitoring
+
+### Client-side Debugging  
+- WebSocket connection status indicators
+- Message processing logs
+- State change tracking
+- Scoreboard shows detailed debug information
+
+## Manual Testing Steps
+
+### Test Current State Functionality
+1. **Start server**: `node server.js`
+2. **Open player 1**: Navigate to game, join as "Player1"
+3. **Mark squares**: Mark 5-10 squares with different participants
+4. **Open scoreboard**: Navigate to `/scoreboard` 
+5. **Verify**: Should show Player1 with correct marked square count
+6. **Open player 2**: Open new tab, join as "Player2"
+7. **Mark squares**: Mark some squares
+8. **Refresh scoreboard**: Should show both players with current state
+9. **Test winner**: Have one player get BINGO
+10. **Verify**: Both players and scoreboard should show winner modal
+
+### Test WebSocket Reliability
+1. **Start game** with 2+ players
+2. **Disconnect/reconnect** players
+3. **Refresh pages** multiple times
+4. **Navigate between routes**
+5. **Verify**: State should persist and sync correctly
+
+## Log Analysis
+
+### Server Logs to Watch For
+```
+📋 Current state requested by client
+📝 Stored marked square for PlayerName: index X
+🎉 Processing BINGO_WINNER for: PlayerName
+📤 Broadcasting BINGO_WINNER message to all clients
+```
+
+### Client Logs to Watch For
+```
+📋 CURRENT_STATE message received
+📋 Scoreboard mounted - requesting current state...
+🎉 BINGO_WINNER MESSAGE RECEIVED IN WEBSOCKET HOOK!
+```
+
+## Performance Notes
+
+- Server maintains complete game state in memory
+- State is sent to new connections automatically
+- Message queue prevents race conditions
+- Game state cleared on GAME_RESET
+
+## Known Limitations
+
+1. **Single Game Session**: Only one active game at a time
+2. **Memory Storage**: Game state lost on server restart  
+3. **No Authentication**: Anyone can reset game from scoreboard
+4. **Browser Dependency**: Requires modern WebSocket support
+
+## Deployment Considerations
+
+1. **WebSocket Support**: Ensure proxy supports WebSocket upgrades
+2. **SSL Configuration**: Use Cloudflare Flexible SSL for simplicity
+3. **Process Management**: Use PM2 for automatic restarts
+4. **Monitoring**: Watch server logs for connection issues
+
 # Troubleshooting WebSocket Connection Issues
 
 ## Common WebSocket Connection Problems

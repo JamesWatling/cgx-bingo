@@ -17,6 +17,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 /* Typography */
@@ -1027,4 +1028,34 @@ button:disabled {
 .bingo-square.disabled:hover {
   transform: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add layout styles for the events sidebar */
+.main-content {
+  margin-right: 350px; /* Account for the 350px sidebar width */
+  min-height: 100vh;
+}
+
+/* Mobile responsiveness for sidebar */
+@media (max-width: 768px) {
+  .main-content {
+    margin-right: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    margin-right: 280px;
+  }
+}
+
+/* Very small screens - hide sidebar or make it smaller */
+@media (max-width: 480px) {
+  .main-content {
+    margin-right: 0;
+  }
+  
+  .events-sidebar {
+    display: none;
+  }
 }

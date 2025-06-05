@@ -70,7 +70,9 @@ const clients = new Map();
 const playersByName = new Map();
 let gameState = {
   winner: null,
-  players: []
+  players: [],
+  playerBoards: new Map(), // Store each player's marked squares
+  events: [] // Store game events
 };
 
 console.log('WebSocket server is ready for connections');
@@ -80,6 +82,9 @@ wss.on('connection', (ws, req) => {
   clients.set(clientId, { ws, playerName: null });
   
   console.log('New client connected');
+  
+  // Send current game state to new connection
+  sendCurrentStateToClient(ws);
   
   ws.on('message', (message) => {
     try {
@@ -97,7 +102,12 @@ wss.on('connection', (ws, req) => {
     const client = clients.get(clientId);
     if (client && client.playerName) {
       console.log('Removing player:', client.playerName);
+      
+      // Add player left event
+      addGameEvent('player_left', client.playerName);
+      
       playersByName.delete(client.playerName);
+      // Note: Keep player board data in case they reconnect
       updatePlayersList();
     }
     clients.delete(clientId);
@@ -107,6 +117,21 @@ wss.on('connection', (ws, req) => {
     console.error('WebSocket error:', error);
   });
 });
+
+function sendCurrentStateToClient(ws) {
+  if (ws.readyState === WebSocket.OPEN) {
+    // Send current game state
+    ws.send(JSON.stringify({
+      type: 'CURRENT_STATE',
+      payload: {
+        winner: gameState.winner,
+        players: gameState.players,
+        playerBoards: Object.fromEntries(gameState.playerBoards),
+        events: gameState.events
+      }
+    }));
+  }
+}
 
 function handleWebSocketMessage(clientId, data) {
   const client = clients.get(clientId);
@@ -125,16 +150,50 @@ function handleWebSocketMessage(clientId, data) {
         console.log('New player joined:', playerName);
         playersByName.set(playerName, { ws: client.ws, name: playerName });
         client.playerName = playerName;
+        
+        // Initialize empty board for new player
+        if (!gameState.playerBoards.has(playerName)) {
+          gameState.playerBoards.set(playerName, []);
+        }
+        
+        // Add player joined event
+        addGameEvent('player_joined', playerName);
       }
       
       updatePlayersList();
       break;
       
     case 'SQUARE_MARKED':
+      // Store the marked square in game state
+      const { playerName: markPlayerName, index, participantName, answer, prompt } = data.payload;
+      
+      if (!gameState.playerBoards.has(markPlayerName)) {
+        gameState.playerBoards.set(markPlayerName, []);
+      }
+      
+      // Add marked square to player's board (avoid duplicates)
+      const playerBoard = gameState.playerBoards.get(markPlayerName);
+      const existingSquare = playerBoard.find(square => square.index === index);
+      
+      if (!existingSquare) {
+        playerBoard.push({ index, participantName, answer: answer || '' });
+        console.log(`📝 Stored marked square for ${markPlayerName}: index ${index}`);
+      }
+      
       // Broadcast square marked to all clients
       broadcast({
         type: 'SQUARE_MARKED',
         payload: data.payload
+      });
+      
+      // Update players list with new marked square count
+      updatePlayersList();
+      
+      // Add game event with prompt text
+      addGameEvent('square_marked', markPlayerName, { 
+        prompt: prompt || 'Unknown prompt', 
+        participantName, 
+        answer: answer || '' 
       });
       break;
       
@@ -158,12 +217,17 @@ function handleWebSocketMessage(clientId, data) {
       // Also update players list
       console.log('📤 Broadcasting PLAYERS_UPDATE message');
       updatePlayersList();
+      
+      // Add game event
+      addGameEvent('bingo_winner', winnerName);
       console.log('✅ BINGO_WINNER processing complete');
       break;
       
     case 'GAME_RESET':
       console.log('Game reset requested');
       gameState.winner = null;
+      gameState.playerBoards.clear(); // Clear all player boards
+      gameState.events = []; // Clear events
       
       // Broadcast game reset to all clients
       broadcast({
@@ -172,6 +236,14 @@ function handleWebSocketMessage(clientId, data) {
       });
       
       updatePlayersList();
+      
+      // Add game event - use system as player name for resets
+      addGameEvent('game_reset', 'System');
+      break;
+      
+    case 'REQUEST_CURRENT_STATE':
+      console.log('📋 Current state requested by client');
+      sendCurrentStateToClient(client.ws);
       break;
   }
 }
@@ -186,10 +258,14 @@ function broadcast(message) {
 }
 
 function updatePlayersList() {
-  const players = Array.from(playersByName.values()).map(player => ({
-    name: player.name,
-    markedSquares: 0 // This would be tracked in a real implementation
-  }));
+  const players = Array.from(playersByName.values()).map(player => {
+    const playerBoard = gameState.playerBoards.get(player.name) || [];
+    return {
+      name: player.name,
+      markedSquares: playerBoard.length,
+      isWinner: gameState.winner === player.name
+    };
+  });
   
   gameState.players = players;
   
@@ -197,6 +273,37 @@ function updatePlayersList() {
     type: 'PLAYERS_UPDATE',
     payload: players
   });
+}
+
+// Helper function to generate unique event ID
+function generateEventId() {
+  return Date.now() + '-' + Math.random().toString(36).substring(2);
+}
+
+// Helper function to add event to game state
+function addGameEvent(type, playerName, details = {}) {
+  const event = {
+    id: generateEventId(),
+    timestamp: Date.now(),
+    type,
+    playerName,
+    details
+  };
+  
+  gameState.events.push(event);
+  
+  // Keep only last 100 events to prevent memory bloat
+  if (gameState.events.length > 100) {
+    gameState.events = gameState.events.slice(-100);
+  }
+  
+  // Broadcast the new event to all clients
+  broadcast({
+    type: 'GAME_EVENT',
+    payload: event
+  });
+  
+  console.log('📝 Added game event:', event);
 }
 
 // Graceful shutdown

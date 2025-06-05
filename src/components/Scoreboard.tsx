@@ -3,7 +3,15 @@ import { useGame } from '../context/GameContext';
 import confetti from 'canvas-confetti';
 
 const Scoreboard: React.FC = () => {
-  const { state, dispatch, sendMessage, isConnected, reconnect } = useGame();
+  const { state, dispatch, sendMessage, isConnected, reconnect, requestCurrentState } = useGame();
+
+  useEffect(() => {
+    // Request current state when scoreboard mounts
+    if (isConnected) {
+      console.log('📋 Scoreboard mounted - requesting current state...');
+      requestCurrentState();
+    }
+  }, [isConnected, requestCurrentState]);
 
   useEffect(() => {
     // Trigger confetti when there's a winner

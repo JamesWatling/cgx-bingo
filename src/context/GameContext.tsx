@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode, useRef } from 'react';
-import { GameState, Player, BingoSquare, WebSocketMessage } from '../types';
+import { GameState, Player, BingoSquare, WebSocketMessage, CurrentStatePayload, MarkedSquare, GameEvent } from '../types';
 import { useWebSocket } from '../hooks/useWebSocket';
 
 interface GameContextType {
@@ -8,6 +8,7 @@ interface GameContextType {
   sendMessage: (message: WebSocketMessage) => void;
   isConnected: boolean;
   reconnect: () => void;
+  requestCurrentState: () => void;
 }
 
 type GameAction =
@@ -17,7 +18,9 @@ type GameAction =
   | { type: 'UPDATE_PLAYERS'; payload: Player[] }
   | { type: 'SET_WINNER'; payload: string }
   | { type: 'RESET_GAME' }
-  | { type: 'PLAY_SOUND'; payload: string };
+  | { type: 'PLAY_SOUND'; payload: string }
+  | { type: 'ADD_EVENT'; payload: GameEvent }
+  | { type: 'SET_EVENTS'; payload: GameEvent[] };
 
 const initialState: GameState = {
   playerName: '',
@@ -27,6 +30,7 @@ const initialState: GameState = {
   winner: null,
   gameStarted: false,
   soundEnabled: true,
+  events: [],
 };
 
 const gameReducer = (state: GameState, action: GameAction): GameState => {
@@ -59,6 +63,10 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
     case 'PLAY_SOUND':
       // Sound will be handled by the component
       return state;
+    case 'ADD_EVENT':
+      return { ...state, events: [...state.events, action.payload] };
+    case 'SET_EVENTS':
+      return { ...state, events: action.payload };
     default:
       return state;
   }
@@ -88,6 +96,15 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const lastRegistrationRef = useRef<string>('');
   const registrationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const debugSequenceRef = useRef<number>(0);
+
+  // Function to request current state from server
+  const requestCurrentState = () => {
+    console.log('📋 Requesting current state from server...');
+    sendMessage({
+      type: 'REQUEST_CURRENT_STATE',
+      payload: null
+    });
+  };
 
   useEffect(() => {
     if (lastMessage) {
@@ -141,6 +158,39 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             console.log('🔄 GAME_RESET message received');
             dispatch({ type: 'RESET_GAME' });
             break;
+          case 'CURRENT_STATE':
+            console.log('📋 CURRENT_STATE message received:', message.payload);
+            // Apply current state to our local state
+            const currentState = message.payload as CurrentStatePayload;
+            if (currentState.winner) {
+              dispatch({ type: 'SET_WINNER', payload: currentState.winner });
+            }
+            if (currentState.players) {
+              dispatch({ type: 'UPDATE_PLAYERS', payload: currentState.players });
+            }
+            if (currentState.events) {
+              dispatch({ type: 'SET_EVENTS', payload: currentState.events });
+            }
+            // Apply marked squares for other players
+            if (currentState.playerBoards) {
+              Object.entries(currentState.playerBoards).forEach(([playerName, squares]) => {
+                if (playerName !== state.playerName) {
+                  // Apply each marked square for other players
+                  (squares as MarkedSquare[]).forEach((square: MarkedSquare) => {
+                    dispatch({ type: 'MARK_SQUARE', payload: { 
+                      index: square.index, 
+                      participantName: square.participantName, 
+                      answer: square.answer 
+                    }});
+                  });
+                }
+              });
+            }
+            break;
+          case 'GAME_EVENT':
+            console.log('📝 GAME_EVENT message received:', message.payload);
+            dispatch({ type: 'ADD_EVENT', payload: message.payload });
+            break;
           default:
             console.log('❓ Unknown message type received:', message.type);
         }
@@ -185,7 +235,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, [state.playerName, isConnected, sendMessage]);
 
   return (
-    <GameContext.Provider value={{ state, dispatch, sendMessage, isConnected, reconnect }}>
+    <GameContext.Provider value={{ state, dispatch, sendMessage, isConnected, reconnect, requestCurrentState }}>
       {children}
     </GameContext.Provider>
   );

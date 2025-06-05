@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import NameEntry from './components/NameEntry';
 import BingoGame from './components/BingoGame';
 import Scoreboard from './components/Scoreboard';
+import EventsSidebar from './components/EventsSidebar';
 import { GameProvider } from './context/GameContext';
 import './styles/theme.css';
 import './styles/animations.css';
@@ -27,20 +28,23 @@ const App = () => {
     <GameProvider>
       <Router>
         <div className="app">
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                playerName ? (
-                  <BingoGame playerName={playerName} />
-                ) : (
-                  <NameEntry onNameSubmit={handleNameSubmit} />
-                )
-              } 
-            />
-            <Route path="/scoreboard" element={<Scoreboard />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <div className="main-content">
+            <Routes>
+              <Route 
+                path="/" 
+                element={
+                  playerName ? (
+                    <BingoGame playerName={playerName} />
+                  ) : (
+                    <NameEntry onNameSubmit={handleNameSubmit} />
+                  )
+                } 
+              />
+              <Route path="/scoreboard" element={<Scoreboard />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
+          <EventsSidebar />
         </div>
       </Router>
     </GameProvider>

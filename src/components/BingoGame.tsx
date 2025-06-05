@@ -117,7 +117,11 @@ const BingoGame: React.FC<BingoGameProps> = ({ playerName }) => {
     // Send WebSocket message
     sendMessage({
       type: 'SQUARE_MARKED',
-      payload: { playerName, ...markData },
+      payload: { 
+        playerName, 
+        ...markData,
+        prompt: state.bingoCard[selectedSquare]?.prompt 
+      },
     });
 
     console.log('🎯 About to check for BINGO...');
