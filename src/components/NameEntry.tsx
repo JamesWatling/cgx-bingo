@@ -32,6 +32,13 @@ const NameEntry: React.FC<NameEntryProps> = ({ onNameSubmit }) => {
   return (
     <div className="name-entry">
       <div className="name-entry-container">
+        <div className="logo-container">
+          <div className="logo-placeholder">
+            CX
+          </div>
+          <div className="logo-text">CGX Bingo</div>
+        </div>
+        
         <h1 className="name-entry-title">CGX Ice Breaker Bingo</h1>
         <p className="name-entry-subtitle">Enter your name to get started!</p>
         

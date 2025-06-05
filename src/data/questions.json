@@ -1,142 +1,418 @@
 [
   {
-    "prompt": "Find someone who has traveled to more than 5 countries",
+    "prompt": "has traveled to more than 5 countries",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who speaks more than 2 languages",
+    "prompt": "speaks more than 2 languages",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has run a marathon",
+    "prompt": "has run a marathon",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who can play a musical instrument",
+    "prompt": "can play a musical instrument",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been skydiving",
+    "prompt": "has been skydiving",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has met a celebrity",
+    "prompt": "has met a celebrity",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has the same birth month as you",
+    "prompt": "has the same birth month as you",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has worked in more than 3 companies",
+    "prompt": "has worked in more than 3 companies",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has a pet",
+    "prompt": "has a pet",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who loves spicy food",
+    "prompt": "loves spicy food",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been to a concert this year",
+    "prompt": "has been to a concert this year",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who prefers tea over coffee",
+    "prompt": "prefers tea over coffee",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has lived in another country",
+    "prompt": "has lived in another country",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has the same favorite color as you",
+    "prompt": "has the same favorite color as you",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been bungee jumping",
+    "prompt": "has been bungee jumping",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who can cook your favorite dish",
+    "prompt": "can cook your favorite dish",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has read more than 10 books this year",
+    "prompt": "has read more than 10 books this year",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been to Disney World/Land",
+    "prompt": "has been to Disney World/Land",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has the same hobby as you",
+    "prompt": "has the same hobby as you",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been on a cruise",
+    "prompt": "has been on a cruise",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has climbed a mountain",
+    "prompt": "has climbed a mountain",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been to a music festival",
+    "prompt": "has been to a music festival",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has learned a new skill during COVID",
+    "prompt": "has learned a new skill during COVID",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been working remotely for over 2 years",
+    "prompt": "has been working remotely for over 2 years",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has the same favorite movie genre as you",
+    "prompt": "has the same favorite movie genre as you",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been to a professional sports game",
+    "prompt": "has been to a professional sports game",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has volunteered for a charity",
+    "prompt": "has volunteered for a charity",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been camping in the last year",
+    "prompt": "has been camping in the last year",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has taken a cooking class",
+    "prompt": "has taken a cooking class",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been to a comedy show",
+    "prompt": "has been to a comedy show",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has the same number of siblings as you",
+    "prompt": "has the same number of siblings as you",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been to a wedding this year",
+    "prompt": "has been to a wedding this year",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has tried a new restaurant this month",
+    "prompt": "has tried a new restaurant this month",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has been to a museum recently",
+    "prompt": "has been to a museum recently",
     "type": "find-someone"
   },
   {
-    "prompt": "Find someone who has the same favorite season as you",
+    "prompt": "has the same favorite season as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "is wearing the same color as you today",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite pizza topping as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to the same college as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has broken a bone",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been on TV or in a movie",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "can juggle",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has never been on a plane",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a drive-in movie theater",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite ice cream flavor as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been scuba diving",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has hiked a famous trail",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a Broadway show",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite TV show as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to more than 3 continents",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has gotten a tattoo",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a professional wrestling match",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same morning routine as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a farmers market this month",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has learned to dance",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been in a parade",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite book genre as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a karaoke bar",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has grown their own vegetables",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a renaissance fair",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same coffee order as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been white water rafting",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a food truck festival",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same workout preference as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a wine tasting",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been zip lining",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same weekend activity preference as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to an escape room",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been rock climbing",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite social media platform as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a trivia night",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a board game cafe",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite type of weather as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a pottery class",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been on a road trip longer than 8 hours",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite holiday as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a midnight movie premiere",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a hot air balloon ride",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite childhood cartoon as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a silent meditation retreat",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a professional photo shoot",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same guilty pleasure TV show as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a haunted house",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been parasailing",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite type of cuisine as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a murder mystery dinner",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a polo match",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite podcast genre as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a speed dating event",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a flash mob",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite childhood game as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a rooftop bar",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been horseback riding",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite way to relax as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a paint and sip class",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a monster truck rally",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite type of exercise as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a silent disco",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been on a blind date",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite childhood snack as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a psychic reading",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a demolition derby",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same sleep schedule as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a planetarium",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to a fire breathing show",
     "type": "find-someone"
   }
 ]

@@ -51,7 +51,7 @@ export interface CurrentStatePayload {
 }
 
 export interface WebSocketMessage {
-  type: 'PLAYERS_UPDATE' | 'SQUARE_MARKED' | 'BINGO_WINNER' | 'GAME_RESET' | 'PLAYER_JOINED' | 'CURRENT_STATE' | 'REQUEST_CURRENT_STATE' | 'GAME_EVENT';
+  type: 'PLAYERS_UPDATE' | 'SQUARE_MARKED' | 'BINGO_WINNER' | 'GAME_RESET' | 'PLAYER_JOINED' | 'CURRENT_STATE' | 'REQUEST_CURRENT_STATE' | 'GAME_EVENT' | 'REMOVE_ALL_USERS' | 'USER_REMOVED';
   payload: any;
 }
 

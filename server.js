@@ -237,13 +237,37 @@ function handleWebSocketMessage(clientId, data) {
       
       updatePlayersList();
       
-      // Add game event - use system as player name for resets
-      addGameEvent('game_reset', 'System');
+      // Do NOT add a game_reset event - we want a completely clean slate
+      console.log('🔄 Game reset complete - events cleared');
       break;
       
     case 'REQUEST_CURRENT_STATE':
       console.log('📋 Current state requested by client');
       sendCurrentStateToClient(client.ws);
+      break;
+      
+    case 'REMOVE_ALL_USERS':
+      console.log('🧹 Remove all users requested');
+      
+      // First, send USER_REMOVED message to all clients to trigger page reload
+      broadcast({
+        type: 'USER_REMOVED',
+        payload: null
+      });
+      
+      // Give clients a brief moment to receive the message before clearing state
+      setTimeout(() => {
+        // Clear all players and game state
+        console.log('🧹 Clearing all players and game state');
+        clients.clear();
+        playersByName.clear();
+        gameState.winner = null;
+        gameState.players = [];
+        gameState.playerBoards.clear();
+        gameState.events = [];
+        
+        console.log('✅ All users removed and game state cleared');
+      }, 500); // 500ms delay to ensure message delivery
       break;
   }
 }

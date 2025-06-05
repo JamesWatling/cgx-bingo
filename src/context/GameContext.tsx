@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect, ReactNode, useRef } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, ReactNode, useRef, useCallback } from 'react';
 import { GameState, Player, BingoSquare, WebSocketMessage, CurrentStatePayload, MarkedSquare, GameEvent } from '../types';
 import { useWebSocket } from '../hooks/useWebSocket';
 
@@ -58,7 +58,8 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
         ...initialState, 
         playerName: state.playerName, // Keep the player name
         players: state.players, // Keep the players list
-        soundEnabled: state.soundEnabled // Keep sound preference
+        soundEnabled: state.soundEnabled, // Keep sound preference
+        events: [] // Explicitly clear events
       };
     case 'PLAY_SOUND':
       // Sound will be handled by the component
@@ -98,13 +99,13 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const debugSequenceRef = useRef<number>(0);
 
   // Function to request current state from server
-  const requestCurrentState = () => {
+  const requestCurrentState = useCallback(() => {
     console.log('📋 Requesting current state from server...');
     sendMessage({
       type: 'REQUEST_CURRENT_STATE',
       payload: null
     });
-  };
+  }, [sendMessage]);
 
   useEffect(() => {
     if (lastMessage) {
@@ -190,6 +191,13 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           case 'GAME_EVENT':
             console.log('📝 GAME_EVENT message received:', message.payload);
             dispatch({ type: 'ADD_EVENT', payload: message.payload });
+            break;
+          case 'USER_REMOVED':
+            console.log('🧹 USER_REMOVED message received - reloading page');
+            // Give a brief moment for any UI updates, then reload the page
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
             break;
           default:
             console.log('❓ Unknown message type received:', message.type);
