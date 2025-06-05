@@ -52,6 +52,10 @@
     "type": "find-someone"
   },
   {
+    "prompt": "was born in a different country",
+    "type": "find-someone"
+  },
+  {
     "prompt": "has the same favorite color as you",
     "type": "find-someone"
   },
@@ -413,6 +417,230 @@
   },
   {
     "prompt": "has been to a fire breathing show",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "works on the NOPE team",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "works on the Patient Provider team",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "works on the RCM team",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "works on the Provider Success team",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "works on the Bamboo team",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has used Spring Health's services themselves",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has worked in mental health care for over 2 years",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "joined Spring Health in the last 6 months",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has attended a mental health conference",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has contributed to improving patient outcomes",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has worked remotely for over 3 years",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has a dedicated home office setup",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has attended more than 5 Zoom meetings today",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "prefers async communication over meetings",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has worked from a coffee shop this month",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has experienced Zoom fatigue",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has a pet that has interrupted a video call",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "uses multiple monitors for work",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has worked from a different time zone this year",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "is a designer",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "is an engineer",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "is a product person",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has shipped a feature in the last month",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has conducted user research",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has debugged code at 2am",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "prefers dark mode over light mode",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has attended a design critique this week",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has written documentation recently",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "uses Figma daily",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has experience with A/B testing",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "is excited to be in LA",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to LA before this trip",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to the resort pool",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "ordered room service last night",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "is missing their home setup right now",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has tried a new LA restaurant on this trip",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "is part of the CGX super pod",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been with CGX for over a year",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "joined a different team before their current one",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has given a team presentation this quarter",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has never met their current teammates in person before",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has a standing desk at home",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "drinks more than 3 cups of coffee per day",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has participated in a hackathon",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "uses keyboard shortcuts for everything",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has a morning routine that includes meditation",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has recommended Spring Health to friends or family",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "speaks in Slack emojis more than words",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has their camera off in most video calls",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has the same favorite productivity app as you",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has been to therapy themselves",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "checks Slack on weekends (guilty!)",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has a plant visible in their video call background",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has worked on healthcare products before Spring Health",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has prepared for a marathon",
+    "type": "find-someone"
+  },
+  {
+    "prompt": "has a custom slack emoji",
     "type": "find-someone"
   }
 ]
