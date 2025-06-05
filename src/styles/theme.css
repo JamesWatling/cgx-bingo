@@ -354,14 +354,39 @@ button:disabled {
 .winner-announcement {
   background: linear-gradient(135deg, var(--primary-light), var(--primary));
   color: var(--text-primary);
-  padding: 1rem 2rem;
-  border-radius: 15px;
+  padding: 2rem;
+  border-radius: 20px;
   font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
   margin-top: 1rem;
   box-shadow: 0 8px 25px rgba(141, 255, 157, 0.3);
   animation: pulse 2s infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.winner-announcement .winner-image-container {
+  margin-bottom: 0.5rem;
+}
+
+.winner-announcement .winner-image {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.winner-announcement h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.winner-announcement p {
+  margin: 0;
+  font-size: 1.3rem;
 }
 
 /* Bingo Card */
@@ -1157,6 +1182,42 @@ button:disabled {
     0 0 0 4px rgba(255, 255, 255, 0.2);
   animation: mega-celebration 0.8s ease-out;
   transform-style: preserve-3d;
+}
+
+.winner-image-container {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.winner-image {
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.winner-image:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* Responsive winner image sizes */
+@media (max-width: 768px) {
+  .winner-image {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .winner-image {
+    max-width: 120px;
+    max-height: 120px;
+  }
 }
 
 .winner-modal-header h2 {

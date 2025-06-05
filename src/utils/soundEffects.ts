@@ -267,6 +267,82 @@ class SoundEffects {
     };
     this.playSequence(sequence);
   }
+
+  async playWinnerVoice(): Promise<void> {
+    // Use Web Speech API to say "WINNER" if available
+    if ('speechSynthesis' in window && this.enabled) {
+      try {
+        const utterance = new SpeechSynthesisUtterance('WINNER!');
+        utterance.rate = 0.8;
+        utterance.pitch = 1.2;
+        utterance.volume = this.masterVolume;
+        
+        // Try to use a more exciting voice if available
+        const voices = speechSynthesis.getVoices();
+        const excitingVoice = voices.find(voice => 
+          voice.name.includes('Daniel') || 
+          voice.name.includes('Alex') || 
+          voice.name.includes('Samantha') ||
+          voice.lang.includes('en')
+        );
+        
+        if (excitingVoice) {
+          utterance.voice = excitingVoice;
+        }
+        
+        speechSynthesis.speak(utterance);
+      } catch (error) {
+        console.warn('Speech synthesis not available:', error);
+        // Fallback to musical "WIN-NER" sound
+        this.playWinnerFallback();
+      }
+    } else {
+      // Fallback to musical "WIN-NER" sound
+      this.playWinnerFallback();
+    }
+  }
+
+  private async playWinnerFallback(): Promise<void> {
+    // Musical interpretation of "WIN-NER" - two distinct notes
+    const sequence: SoundSequence = {
+      sounds: [
+        // "WIN" - higher pitch
+        { frequency: 880, duration: 0.4, volume: 0.4, type: 'sine', attack: 0.02, decay: 0.1, sustain: 0.8, release: 0.3 },
+        { frequency: 1100, duration: 0.4, volume: 0.3, type: 'sine', attack: 0.02, decay: 0.1, sustain: 0.8, release: 0.3 },
+        
+        // "NER" - even higher with flourish
+        { frequency: 1320, duration: 0.6, volume: 0.4, type: 'sine', attack: 0.02, decay: 0.1, sustain: 0.8, release: 0.4 },
+        { frequency: 1760, duration: 0.6, volume: 0.3, type: 'sine', attack: 0.02, decay: 0.1, sustain: 0.8, release: 0.4 }
+      ],
+      delays: [0, 0, 0.5, 0.5]
+    };
+    this.playSequence(sequence);
+  }
+
+  async playEpicWinnerCelebration(): Promise<void> {
+    // Ultimate winner celebration - combines music + voice
+    
+    // First play the musical celebration
+    this.playBingo();
+    
+    // Then add the voice after a brief moment
+    setTimeout(() => {
+      this.playWinnerVoice();
+    }, 800);
+    
+    // Add some extra musical flourishes
+    setTimeout(() => {
+      const flourishSequence: SoundSequence = {
+        sounds: [
+          { frequency: 2093, duration: 0.3, volume: 0.2, type: 'sine', attack: 0.01, release: 0.25 },
+          { frequency: 2349, duration: 0.3, volume: 0.2, type: 'sine', attack: 0.01, release: 0.25 },
+          { frequency: 2637, duration: 0.4, volume: 0.25, type: 'sine', attack: 0.01, release: 0.35 }
+        ],
+        delays: [0, 0.2, 0.4]
+      };
+      this.playSequence(flourishSequence);
+    }, 1500);
+  }
 }
 
 // Export singleton instance
@@ -284,5 +360,6 @@ export const playError = () => soundEffects.playError();
 export const playSuccess = () => soundEffects.playSuccess();
 export const playAmbientChime = () => soundEffects.playAmbientChime();
 export const playSurpriseEffect = () => soundEffects.playSurpriseEffect();
+export const playEpicWinnerCelebration = () => soundEffects.playEpicWinnerCelebration();
 
 export default soundEffects; 

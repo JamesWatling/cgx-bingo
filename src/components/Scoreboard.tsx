@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useGame } from '../context/GameContext';
 import BackgroundEffects from './BackgroundEffects';
 import confetti from 'canvas-confetti';
-import { playButtonClick, playSuccess, soundEffects } from '../utils/soundEffects';
+import { playButtonClick, playSuccess, playEpicWinnerCelebration, soundEffects } from '../utils/soundEffects';
 
 const Scoreboard: React.FC = () => {
   const { state, dispatch, sendMessage, isConnected, reconnect, requestCurrentState } = useGame();
@@ -39,8 +39,13 @@ const Scoreboard: React.FC = () => {
         colors: ['#ff6b35', '#ffd700', '#00CC76', '#8DFF9D', '#ff4757'],
         ticks: 200
       });
+      
+      // Play epic winner celebration
+      if (state.soundEnabled) {
+        playEpicWinnerCelebration();
+      }
     }
-  }, [state.winner]);
+  }, [state.winner, state.soundEnabled]);
 
   const handleReset = () => {
     if (state.soundEnabled) {
@@ -243,6 +248,13 @@ const Scoreboard: React.FC = () => {
 
       {state.winner && (
         <div className="winner-announcement mega-celebration animate-bounceIn">
+          <div className="winner-image-container">
+            <img 
+              src="/images/winner.png" 
+              alt="Winner!" 
+              className="winner-image animate-zoomIn"
+            />
+          </div>
           <h2>🎉 BINGO! 🎉</h2>
           <p>{state.winner} is the winner!</p>
         </div>

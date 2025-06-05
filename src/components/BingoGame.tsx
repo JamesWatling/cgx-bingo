@@ -14,6 +14,7 @@ import {
   playHover,
   playButtonClick,
   playAmbientChime,
+  playEpicWinnerCelebration,
   soundEffects
 } from '../utils/soundEffects';
 
@@ -101,7 +102,7 @@ const BingoGame: React.FC<BingoGameProps> = ({ playerName }) => {
       
       // Play enhanced bingo sound for everyone when someone wins
       if (state.soundEnabled) {
-        playBingo();
+        playEpicWinnerCelebration();
       }
       console.log('✨ Enhanced confetti and sound triggered');
     }
@@ -652,6 +653,13 @@ const BingoGame: React.FC<BingoGameProps> = ({ playerName }) => {
               <h2>🎉 BINGO! 🎉</h2>
             </div>
             <div className="winner-modal-body">
+              <div className="winner-image-container">
+                <img 
+                  src="/images/winner.png" 
+                  alt="Winner!" 
+                  className="winner-image animate-bounceIn"
+                />
+              </div>
               <div className="winner-announcement">
                 {state.winner === playerName ? (
                   <p className="winner-text">Congratulations! You won!</p>
