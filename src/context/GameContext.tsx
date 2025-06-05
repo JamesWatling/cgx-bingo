@@ -68,11 +68,22 @@ const GameContext = createContext<GameContextType | undefined>(undefined);
 
 export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
-  const { sendMessage, lastMessage, isConnected, reconnect } = useWebSocket(
-    process.env.NODE_ENV === 'production' 
-      ? 'wss://your-websocket-url.com' 
-      : 'ws://localhost:8080'
-  );
+  
+  // Determine WebSocket URL based on environment
+  const getWebSocketUrl = () => {
+    if (process.env.NODE_ENV === 'production') {
+      // In production, use the same host as the current page
+      // Cloudflare handles SSL termination, so we detect HTTPS and use WSS
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const host = window.location.host;
+      return `${protocol}//${host}`;
+    } else {
+      // In development, use localhost:8080
+      return 'ws://localhost:8080';
+    }
+  };
+  
+  const { sendMessage, lastMessage, isConnected, reconnect } = useWebSocket(getWebSocketUrl());
   
   const lastRegistrationRef = useRef<string>('');
   const registrationTimeoutRef = useRef<NodeJS.Timeout | null>(null);

@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js",
+    "server:dev": "node server.js",
+    "server:prod": "NODE_ENV=production node server.js"
   },
   "keywords": [
     "bingo",
